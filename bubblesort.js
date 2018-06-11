@@ -30,4 +30,4 @@ function swap(j, i){
   }
 }
 
-console.log(bubbleSort([3, 1, 4, 9]));
+

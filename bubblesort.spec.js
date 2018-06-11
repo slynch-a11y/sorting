@@ -1,7 +1,14 @@
 describe('bubbleSort', function () {
   it('handles an empty array', function(){
     expect(bubbleSort([]) ).toEqual( [] );
-  });
+	});
+	beforeAll(function () {
+		spyOn(window, 'swap').and.callThrough();
+	});
+	it('calls the swap function', function () {
+		window.bubbleSort([3, 1]);
+		expect(window.swap.calls.count()).toEqual(1);
+	});
 	it('is a function', function () {
 		expect(typeof bubbleSort).toEqual('function');
 	});
@@ -26,5 +33,7 @@ describe('bubbleSort', function () {
     expect(sorted).toEqual([-443, -9, 107, 216, 247, 300]);
 		expect(Array.prototype.sort.calls.count()).toEqual(0);
 		expect(sorted.length).toEqual(6);
-  });
+	});
+
 });
+
