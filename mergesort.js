@@ -1,21 +1,27 @@
-function split(wholeArray) {
-  if (wholeArray.length === 1){
-    return wholeArray;
+function mergeSort(array){
+  if (array.length === 1){
+    return array;
   }
+  let splits = split(array);
+  let firstHalf = splits[0];
+  let secondHalf = splits[1];
+  return merge(mergeSort(firstHalf), mergeSort(secondHalf));
+}
 
- let midpoint = Math.floor(wholeArray.length/2);
+function split(wholeArray) {
+
+ let midpoint = Math.floor(wholeArray.length / 2);
  let firstHalf = wholeArray.slice(0, midpoint);
  let secondHalf = wholeArray.slice(midpoint, wholeArray.length);
 
   return [firstHalf, secondHalf];
 }
 
-function mergeSort(array) {
+function merge(firstHalf, secondHalf) {
 const finalArr = [];
+
 let firstCounter = 0;
 let secondCounter = 0;
-let firstHalf = array[0];
-let secondHalf = array[1];
 
 
 while (firstCounter < firstHalf.length && secondCounter < secondHalf.length){
@@ -29,12 +35,18 @@ while (firstCounter < firstHalf.length && secondCounter < secondHalf.length){
   }
 
 }
-// let finalAns = finalArr.concat(firstHalf.slice(firstCounter)).concat(secondHalf.slice(secondCounter));
-
-mergeSort(split(firstHalf));
-mergeSort(split(secondHalf));
-
-
+while (firstCounter < firstHalf.length){
+  finalArr.push(firstHalf[firstCounter]);
+  firstCounter++;
+}
+while (secondCounter < secondHalf.length){
+  finalArr.push(secondHalf[secondCounter]);
+  secondCounter++;
+}
+return finalArr;
 }
 
-console.log(mergeSort([3, 2, 1, 4, 5]));
+
+let array = [4, 3, 7, 1, 9, 2];
+
+console.log(mergeSort(array));
